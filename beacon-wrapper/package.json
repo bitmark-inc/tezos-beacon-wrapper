@@ -1,0 +1,26 @@
+{
+  "name": "autonomy-beacon-wrapper",
+  "version": "1.2.29",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Autonomy",
+    "Beacon",
+    "Wallet connect",
+    "Tezos"
+  ],
+  "author": "BitmarkInc <[bitmark@bitmark.com](mailto:bitmark@bitmark.com)>",
+  "license": "MIT",
+  "dependencies": {
+    "@airgap/beacon-sdk": "^3.3.4",
+    "@taquito/beacon-wallet": "^15.1.0",
+    "@taquito/taquito": "15.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
