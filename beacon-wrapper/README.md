@@ -1,4 +1,4 @@
-# ✨Autonomy connect alpha✨
+# ✨The beacon wrapper✨
 ## Installation
 WIP
 ## Description
