@@ -1715,7 +1715,14 @@ class AuBeaconWrapper extends beacon_dapp_1.DAppClient {
         return new Promise((resolve) => {
             frame.onload = () => {
                 this.auClickPromise(frame).then((r) => __awaiter(this, void 0, void 0, function* () {
-                    console.log("opt1");
+                    const autonomyName = "Autonomy";
+                    const activeAccount = yield this.getActiveAccount();
+                    if (activeAccount) {
+                        const peerOfActiveAccount = yield this.getPeerWrapped(activeAccount);
+                        if (!peerOfActiveAccount.name.includes(autonomyName)) {
+                            yield this.clearActiveAccount();
+                        }
+                    }
                     this.requestPermissionsWrapped().then(() => {
                         resolve(1);
                     });

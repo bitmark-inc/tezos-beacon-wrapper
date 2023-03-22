@@ -1,4 +1,4 @@
-# ✨The beacon wrapper✨
+# ✨Beacon customization
 ## Installation
 WIP
 ## Description

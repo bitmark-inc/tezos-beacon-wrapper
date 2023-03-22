@@ -2191,8 +2191,14 @@ export class AuBeaconWrapper extends DAppClient {
     return new Promise<number>((resolve) => {
       frame.onload = () => {
         this.auClickPromise(frame).then(async r => {
-          console.log("opt1");
-
+          const autonomyName = "Autonomy";
+          const activeAccount = await this.getActiveAccount()
+          if (activeAccount) {
+            const peerOfActiveAccount = await this.getPeerWrapped(activeAccount);
+            if (!peerOfActiveAccount.name.includes(autonomyName)) {
+              await this.clearActiveAccount();
+            }
+          }
           this.requestPermissionsWrapped().then(() => {
             resolve(1);
           })
