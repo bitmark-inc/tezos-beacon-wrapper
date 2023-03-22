@@ -201,7 +201,7 @@ const preparePairingAlert = (id, shadowRoot, pairingPayload) => __awaiter(void 0
                         // If we have previously triggered the load, do not load it again (this can lead to multiple QRs being added if "pairingPayload.p2pSyncCode()" is slow)
                         qrShown = true;
                         const code = yield serializer.serialize(yield pairingPayload.p2pSyncCode());
-                        const uri = (0, get_tzip10_link_1.getTzip10Link)('autonomy-tezos://', code);
+                        const uri = (0, get_tzip10_link_1.getTzip10Link)('tezos://', code);
                         const qrSVG = (0, qr_1.getQrData)(uri, 'svg');
                         const qrString = qrSVG.replace('<svg', `<svg class="beacon-alert__image"`);
                         qr.insertAdjacentHTML('afterbegin', qrString);

@@ -22,17 +22,27 @@ class AuBeaconWrapper extends DappClientWrapped_1.DAppClientWrapped {
         this.title = title;
     }
     showConnect() {
-        try {
-            const container = document.createElement('div');
-            container.id = 'beacon-button-container';
-            document.body.appendChild(container);
-            const wrapperIframe = this.instantiateIframe();
-            container.appendChild(wrapperIframe);
-            return this.frameLoadPromise(wrapperIframe, container);
-        }
-        catch (e) {
-            throw e;
-        }
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const container = document.createElement('div');
+                container.id = 'beacon-button-container';
+                document.body.appendChild(container);
+                const wrapperIframe = this.instantiateIframe();
+                wrapperIframe.addEventListener('load', () => {
+                    var _a;
+                    console.log(wrapperIframe.contentDocument);
+                    const siteNameElement = (_a = wrapperIframe.contentDocument) === null || _a === void 0 ? void 0 : _a.querySelector('.site-name');
+                    if (siteNameElement) {
+                        siteNameElement.textContent = this.title;
+                    }
+                });
+                container.appendChild(wrapperIframe);
+                return this.frameLoadPromise(wrapperIframe, container);
+            }
+            catch (e) {
+                throw e;
+            }
+        });
     }
     frameLoadPromise(frame, container) {
         return new Promise((resolve) => {

@@ -288,7 +288,7 @@ export const preparePairingAlert = async (
             qrShown = true
 
             const code = await serializer.serialize(await pairingPayload.p2pSyncCode())
-            const uri = getTzip10Link('autonomy-tezos://', code)
+            const uri = getTzip10Link('tezos://', code)
             const qrSVG = getQrData(uri, 'svg')
             const qrString = qrSVG.replace('<svg', `<svg class="beacon-alert__image"`)
             qr.insertAdjacentHTML('afterbegin', qrString)

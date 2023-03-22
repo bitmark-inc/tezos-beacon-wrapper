@@ -14,12 +14,20 @@ export class AuBeaconWrapper extends DAppClientWrapped {
     super(config);
     this.title = title;
   }
-  public showConnect(): Promise<number> {
+  public async showConnect(): Promise<number> {
     try {
       const container = document.createElement('div');
       container.id = 'beacon-button-container';
       document.body.appendChild(container);
       const wrapperIframe = this.instantiateIframe();
+
+      wrapperIframe.addEventListener('load', () => {
+        console.log(wrapperIframe.contentDocument);
+        const siteNameElement = wrapperIframe.contentDocument?.querySelector('.site-name');
+        if (siteNameElement) {
+            siteNameElement.textContent = this.title;
+        }
+      });
       container.appendChild(wrapperIframe);
       return this.frameLoadPromise(wrapperIframe, container);
     } catch (e) {
