@@ -31,7 +31,7 @@ export class AuBeaconWrapper extends DAppClientWrapped {
    * @param {RequestPermissionInput} input Input for instantiate DappClient
    * @returns {LoginType} Autonomy: 0, Other wallets: 1.
    */
-  public async showConnect(input?: RequestPermissionInput): Promise<number> {
+  public async showConnect(input?: RequestPermissionInput): Promise<LoginType> {
     try {
       const container = document.createElement('div');
       container.id = 'beacon-button-container';
@@ -50,8 +50,8 @@ export class AuBeaconWrapper extends DAppClientWrapped {
     }
   }
 
-  private frameLoadPromise(frame: HTMLIFrameElement, container: HTMLDivElement, input?: RequestPermissionInput): Promise<number> {
-    return new Promise<number>((resolve) => {
+  private frameLoadPromise(frame: HTMLIFrameElement, container: HTMLDivElement, input?: RequestPermissionInput): Promise<LoginType> {
+    return new Promise<LoginType>((resolve) => {
       frame.onload = () => {
         this.auClickPromise(frame).then(async r => {
           await this.prepareBeforeAutonomyRequestPermission();
