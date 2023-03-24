@@ -1,56 +1,68 @@
-import { DAppClientOptions } from "@airgap/beacon-sdk";
-import { DAppClientWrapped } from "./DappClientWrapped";
+import { DAppClientOptions, RequestPermissionInput } from "@airgap/beacon-sdk";
+import { LoginType } from "./const/login-type";
+import { DAppClientWrapped } from "./features-wrapped/DappClientWrapped";
 
+/**
+ * @publicapi
+ *
+ * @class DappClient-wrapper and a custom UI for BeaconSDK.
+ *
+ * This Class is extended from the original DappClient of beacon, with more flexible UI.
+ * The DAppClient has to be used in decentralized applications. It handles all the logic related to connecting to beacon-compatible
+ * wallets and sending requests.
+ *
+ * @param {string} title name of the project, it will be appeared on the title of the custom pop-up.
+ * @param {DAppClientOptions} config follow the original config of DappClient.
+ *
+ * @category DAppWrapped
+ */
 export class AuBeaconWrapper extends DAppClientWrapped {
   title: string;
   constructor(
-    /**
-    * @param title name of the project, it will be appeared on the title.
-    */
-    /** @type {string} */
     title: string,
     config: DAppClientOptions
   ) {
     super(config);
     this.title = title;
   }
-  public async showConnect(): Promise<number> {
+  /**
+   *
+   * Call a pop-up to connect. Return a number preferred to an option.
+   * @param {RequestPermissionInput} input Input for instantiate DappClient
+   * @returns {LoginType} Autonomy: 0, Other wallets: 1.
+   */
+  public async showConnect(input?: RequestPermissionInput): Promise<number> {
     try {
       const container = document.createElement('div');
       container.id = 'beacon-button-container';
       document.body.appendChild(container);
       const wrapperIframe = this.instantiateIframe();
-
       wrapperIframe.addEventListener('load', () => {
-        console.log(wrapperIframe.contentDocument);
         const siteNameElement = wrapperIframe.contentDocument?.querySelector('.site-name');
         if (siteNameElement) {
             siteNameElement.textContent = this.title;
         }
       });
       container.appendChild(wrapperIframe);
-      return this.frameLoadPromise(wrapperIframe, container);
+      return this.frameLoadPromise(wrapperIframe, container, input);
     } catch (e) {
       throw e;
     }
   }
 
-  private frameLoadPromise(frame: HTMLIFrameElement, container: HTMLDivElement): Promise<number> {
+  private frameLoadPromise(frame: HTMLIFrameElement, container: HTMLDivElement, input?: RequestPermissionInput): Promise<number> {
     return new Promise<number>((resolve) => {
       frame.onload = () => {
         this.auClickPromise(frame).then(async r => {
-          console.log("Autonomy.");
           await this.prepareBeforeAutonomyRequestPermission();
-          this.requestPermissions({}, true).then(() => {
-            resolve(1);
+          this.requestPermissions(input, true).then(() => {
+            resolve(LoginType.Autonomy);
           })
           container.remove();
         })
-
         this.otherClickPromise(frame).then(r => {
-          console.log("Original Beacon.");
-          this.requestPermissions().then(() => {
-            resolve(2);
+          this.requestPermissions(input).then(() => {
+            resolve(LoginType.OtherWallets);
           })
           container.remove();
         })

@@ -93,11 +93,11 @@ import {
   WebApp
 } from '@airgap/beacon-sdk';
 
-import { BeaconEventHandlerWrapped } from './features-wrapped/events-wrapped';
+import { BeaconEventHandlerWrapped } from './events-wrapped';
 
 const logger = new Logger('DAppClient')
 /**
- * @publicapi
+ * @internalapi
  *
  * This Class is extended from the original DappClient of beacon, with more flexible UI.
  * The DAppClient has to be used in decentralized applications. It handles all the logic related to connecting to beacon-compatible

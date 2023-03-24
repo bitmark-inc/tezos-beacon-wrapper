@@ -44,10 +44,10 @@ const beacon_message_events_1 = require("@airgap/beacon-dapp/dist/cjs/beacon-mes
 const DappP2PTransport_1 = require("@airgap/beacon-dapp/dist/cjs/transports/DappP2PTransport");
 const DappPostMessageTransport_1 = require("@airgap/beacon-dapp/dist/cjs/transports/DappPostMessageTransport");
 const beacon_sdk_1 = require("@airgap/beacon-sdk");
-const events_wrapped_1 = require("./features-wrapped/events-wrapped");
+const events_wrapped_1 = require("./events-wrapped");
 const logger = new beacon_sdk_1.Logger('DAppClient');
 /**
- * @publicapi
+ * @internalapi
  *
  * This Class is extended from the original DappClient of beacon, with more flexible UI.
  * The DAppClient has to be used in decentralized applications. It handles all the logic related to connecting to beacon-compatible

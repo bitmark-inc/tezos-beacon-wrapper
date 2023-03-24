@@ -3,9 +3,9 @@ import { DappP2PTransport } from '@airgap/beacon-dapp/dist/cjs/transports/DappP2
 import { BeaconEventHandlerFunction, BeaconEventType } from '@airgap/beacon-dapp/dist/cjs/events';
 import { DappPostMessageTransport } from '@airgap/beacon-dapp/dist/cjs/transports/DappPostMessageTransport';
 import { AccountInfo, AppMetadata, BeaconEvent, BeaconEventHandler, BeaconMessageType, Blockchain, BlockchainRequestV3, BlockchainResponseV3, BlockExplorer, BroadcastResponseOutput, Client, ColorMode, ExtendedP2PPairingResponse, ExtendedPeerInfo, ExtendedPostMessagePairingResponse, OperationResponseOutput, PermissionRequestV3, PermissionResponseOutput, PermissionResponseV3, RequestBroadcastInput, RequestOperationInput, RequestPermissionInput, RequestSignPayloadInput, SignPayloadResponseOutput, Transport, TransportType } from '@airgap/beacon-sdk';
-import { BeaconEventHandlerWrapped } from './features-wrapped/events-wrapped';
+import { BeaconEventHandlerWrapped } from './events-wrapped';
 /**
- * @publicapi
+ * @internalapi
  *
  * This Class is extended from the original DappClient of beacon, with more flexible UI.
  * The DAppClient has to be used in decentralized applications. It handles all the logic related to connecting to beacon-compatible
