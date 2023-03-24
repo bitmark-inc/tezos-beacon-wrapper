@@ -1,4 +1,10 @@
-# A tezos-beacon-wrapper
+# ✨Beacon customization
+## Installation
+WIP
+## Description
+WIP
+## Instruction
+WIP
 ## Testing guideline:
 1. Make sure you are in the test folder.
 2. Install dependencies.
