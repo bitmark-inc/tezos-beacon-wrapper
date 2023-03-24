@@ -39,7 +39,6 @@ $(document).ready(async function(){
     btn2.css("display", "block");
   });
   btn2.click(async function(){
-    await ABW.removeAllPeers();
     await ABW.clearActiveAccount();
     btn1.css("display", "block");
     btn2.css("display", "none");
